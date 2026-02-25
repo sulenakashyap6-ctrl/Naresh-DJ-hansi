@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Naresh DJ Hansi Official| Best wedding & Party DJ in Hisar Haryana</title>
 	<style>
-		:root{--red:#e53935;--yellow:#ffd54f;--blue:#1976d2;--bg:#fff7e6}
+		:root{--red:#e53935;--yellow:#ffd54f;--blue:#1976d2;--bg:#fff7e6;--accent:#ff6a00}
 		html,body{height:100%;margin:0;font-family:Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:#222}
 		/* Mobile-first */
 		.container{padding:18px 16px 120px;max-width:900px;margin:0 auto}
@@ -19,6 +19,21 @@
 		.btn-whatsapp{background:#25D366;font-size:16px}
 		section{margin:18px 0}
 		.card{background:#fff;border-radius:10px;padding:14px;box-shadow:0 6px 14px rgba(0,0,0,0.06)}
+		/* Top icon tabs (Google-style) */
+		.tabs{display:flex;gap:8px;align-items:center;overflow:auto;padding:10px 4px;margin:14px 0}
+		.tab{flex:0 0 auto;padding:10px 12px;border-radius:999px;font-weight:700;color:#333;background:transparent;cursor:pointer;text-decoration:none;position:relative}
+		.tab .label{display:inline-block;margin-left:8px}
+		.tab:focus{outline:2px solid rgba(0,0,0,0.06)}
+		.tab.active{color:var(--accent)}
+		.tab.active::after{content:"";position:absolute;left:12px;right:12px;bottom:-6px;height:3px;background:var(--accent);border-radius:3px}
+		/* Gallery */
+		.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
+		.gallery-grid img{width:100%;height:140px;object-fit:cover;border-radius:8px}
+		.upload-row{display:flex;gap:8px;align-items:center}
+		.input-file{display:inline-block}
+		/* Reviews */
+		.review{border-top:1px solid #f1f1f1;padding:8px 0}
+		.stars{color:#ffb400;font-weight:800}
 		.big-number{font-size:20px;font-weight:800;color:var(--red)}
 		ul.services{list-style:none;padding:0;margin:8px 0 0}
 		ul.services li{padding:8px 0;border-bottom:1px dashed #eee;font-weight:600}
@@ -29,6 +44,7 @@
 		.sticky-whatsapp{position:fixed;left:14px;bottom:14px;background:#25D366;color:#fff;padding:12px 14px;border-radius:999px;box-shadow:0 8px 20px rgba(0,0,0,0.12);text-decoration:none;font-weight:800;font-size:16px;z-index:999}
 		footer{padding:20px 0;text-align:center;color:#444;font-weight:600}
 		@media(min-width:700px){h1{font-size:34px}.container{padding:36px}}
+		@media(min-width:900px){.gallery-grid{grid-template-columns:repeat(3,1fr)}.gallery-grid img{height:160px}}
 	</style>
 </head>
 <body>
@@ -43,7 +59,14 @@
 			</div>
 		</header>
 
-		<section class="card" aria-labelledby="about-title">
+		<!-- Top Icon Tabs Navigation -->
+		<nav class="tabs" role="navigation" aria-label="Main tabs">
+			<a class="tab active" href="#about" data-target="about">👤 <span class="label">About</span></a>
+			<a class="tab" href="#gallery" data-target="gallery">🖼️ <span class="label">Photo Gallery</span></a>
+			<a class="tab" href="#reviews" data-target="reviews">⭐ <span class="label">People Reviews</span></a>
+		</nav>
+
+		<section id="about" class="card" aria-labelledby="about-title">
 			<h2 id="about-title">About —  Naresh DJ Hansi Official</h2>
 			<p> Naresh DJ Hansi Official – shaadi aur barat ke liye trusted DJ. Full sound system & DJ lights. Time par setup, professional service. Contact person: Naresh Kumar.</p>
 			<p class="big-number">Contact: 9992478765</p>
@@ -68,6 +91,35 @@
 			</div>
 		</section>
 
+		<!-- Photo Gallery (Public Upload) -->
+		<section id="gallery" class="card" aria-labelledby="gallery-title">
+			<h3 id="gallery-title">Photo Gallery</h3>
+			<p class="lead">Apni shaadi / barat ki photo yahan upload karein. Photo turant gallery me dikh jayegi.</p>
+			<div class="upload-row">
+				<label class="btn input-file" for="photo-input">📁 Select Photo</label>
+				<input id="photo-input" type="file" accept="image/*" style="display:none">
+			</div>
+			<div id="gallery-grid" class="gallery-grid" aria-live="polite"></div>
+		</section>
+
+		<!-- People Reviews (Public Reviews) -->
+		<section id="reviews" class="card" aria-labelledby="reviews-title">
+			<h3 id="reviews-title">People Reviews</h3>
+			<form id="review-form" style="display:grid;gap:8px;margin-top:8px">
+				<input id="review-name" type="text" placeholder="Aapka naam" required style="padding:10px;border-radius:8px;border:1px solid #eee">
+				<select id="review-rating" required style="padding:10px;border-radius:8px;border:1px solid #eee">
+					<option value="5">★★★★★ 5</option>
+					<option value="4">★★★★ 4</option>
+					<option value="3">★★★ 3</option>
+					<option value="2">★★ 2</option>
+					<option value="1">★ 1</option>
+				</select>
+				<textarea id="review-message" rows="3" placeholder="Aapka review / message" required style="padding:10px;border-radius:8px;border:1px solid #eee"></textarea>
+				<button class="btn btn-call" type="submit">Submit Review</button>
+			</form>
+			<div id="reviews-list" style="margin-top:12px" aria-live="polite"></div>
+		</section>
+
 		<section class="card" aria-labelledby="contact-title">
 			<h3 id="contact-title">Book karne ke liye abhi call karein</h3>
 			<p>Contact Person: <strong>Naresh Kumar</strong></p>
@@ -84,5 +136,127 @@
 	<!-- Sticky call + WhatsApp buttons for mobile -->
 	<a class="sticky-call" href="tel:9992478765">📞 CALL NOW</a>
 	<a class="sticky-whatsapp" href="https://wa.me/919992478765" target="_blank" rel="noreferrer">💬 WhatsApp</a>
+
+	<script>
+	(function(){
+		const GALLERY_KEY = 'ndj_gallery_v1';
+		const REVIEWS_KEY = 'ndj_reviews_v1';
+		const tabs = Array.from(document.querySelectorAll('.tab'));
+		const sections = ['about','gallery','reviews'].map(id=>document.getElementById(id)).filter(Boolean);
+
+		function setActive(targetId){
+			tabs.forEach(t=>t.classList.toggle('active', t.dataset.target===targetId));
+		}
+
+		// Tab click -> smooth scroll
+		tabs.forEach(tab=>{
+			tab.addEventListener('click', function(e){
+				e.preventDefault();
+				const id = this.dataset.target;
+				const el = document.getElementById(id);
+				if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+				setActive(id);
+			});
+		});
+
+		// Scroll-spy (efficient using rAF)
+		let ticking = false;
+		function onScroll(){
+			if(ticking) return; ticking = true;
+			requestAnimationFrame(()=>{
+				let active = sections[0] && sections[0].id;
+				for(const s of sections){
+					const r = s.getBoundingClientRect();
+					if(r.top <= 120 && r.bottom > 120){ active = s.id; break }
+					if(r.top > 120){ active = s.id; break }
+				}
+				setActive(active);
+				ticking = false;
+			});
+		}
+		window.addEventListener('scroll', onScroll, {passive:true});
+
+		// Gallery functions
+		const input = document.getElementById('photo-input');
+		const grid = document.getElementById('gallery-grid');
+		let gallery = [];
+
+		function loadGallery(){
+			try{ gallery = JSON.parse(localStorage.getItem(GALLERY_KEY) || '[]') }catch(e){gallery=[]}
+			renderGallery();
+		}
+
+		function saveGallery(){ localStorage.setItem(GALLERY_KEY, JSON.stringify(gallery)); }
+
+		function renderGallery(){
+			if(!grid) return;
+			grid.innerHTML = '';
+			for(const src of gallery.slice().reverse()){ // show newest first
+				const img = document.createElement('img');
+				img.src = src;
+				img.loading = 'lazy';
+				grid.appendChild(img);
+			}
+		}
+
+		if(input){
+			input.addEventListener('change', function(e){
+				const file = this.files && this.files[0];
+				if(!file) return;
+				if(!file.type.startsWith('image/')) return alert('Please select an image file');
+				const reader = new FileReader();
+				reader.onload = function(){
+					gallery.push(reader.result);
+					saveGallery();
+					renderGallery();
+					input.value = '';
+				}
+				reader.readAsDataURL(file);
+			});
+		}
+
+		// Reviews functions
+		const form = document.getElementById('review-form');
+		const reviewsList = document.getElementById('reviews-list');
+		let reviews = [];
+
+		function loadReviews(){
+			try{ reviews = JSON.parse(localStorage.getItem(REVIEWS_KEY) || '[]') }catch(e){reviews=[]}
+			renderReviews();
+		}
+
+		function saveReviews(){ localStorage.setItem(REVIEWS_KEY, JSON.stringify(reviews)); }
+
+		function renderReviews(){
+			if(!reviewsList) return;
+			reviewsList.innerHTML = '';
+			for(const r of reviews.slice().reverse()){
+				const wrap = document.createElement('div'); wrap.className = 'review';
+				const title = document.createElement('div'); title.style.fontWeight='700'; title.textContent = r.name || 'Anonymous';
+				const stars = document.createElement('div'); stars.className = 'stars'; stars.textContent = '★'.repeat(Math.max(1,Math.min(5,Number(r.rating)||1)));
+				const msg = document.createElement('div'); msg.textContent = r.message || '';
+				wrap.appendChild(title); wrap.appendChild(stars); wrap.appendChild(msg);
+				reviewsList.appendChild(wrap);
+			}
+		}
+
+		if(form){
+			form.addEventListener('submit', function(e){
+				e.preventDefault();
+				const name = document.getElementById('review-name').value.trim();
+				const rating = document.getElementById('review-rating').value;
+				const message = document.getElementById('review-message').value.trim();
+				if(!message) return alert('Please add a message');
+				reviews.push({name, rating, message, created: Date.now()});
+				saveReviews();
+				renderReviews();
+				form.reset();
+			});
+		}
+
+		// Initial load
+		document.addEventListener('DOMContentLoaded', function(){ loadGallery(); loadReviews(); onScroll(); });
+	})();
+	</script>
 </body>
 </html>
